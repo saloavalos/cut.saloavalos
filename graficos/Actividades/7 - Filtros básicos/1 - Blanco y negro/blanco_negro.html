@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Copiar Imagen</title>
+    <link rel="stylesheet" href="cpy_imagen.css">
+</head>
+
+<body>
+        <div class="gen">
+            <input type='file' id='cargar' style="background-color:white;">
+        </div>
+        <div class="gen">
+            <label>Blanco y Negro</label><br>
+            <input type="range" value="0" max="127" min="-127" id="umbral2">
+        </div>
+       
+    <br><br>
+    <canvas id='canvas'></canvas>
+    <canvas id='canvas2'></canvas>
+    <script src="byn.js"></script>
+</body>
+
+</html>
