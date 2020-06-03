@@ -1,0 +1,12 @@
+canvas {
+    border-style: solid;
+}
+
+.dives {
+    float: left;
+    display: flex;
+}
+
+.dives>div {
+    padding: 5px;
+}
