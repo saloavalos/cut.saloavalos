@@ -1,0 +1,12 @@
+canvas {
+    border-style: solid;
+}
+
+body {
+    padding: 2%;
+}
+
+html, body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f1f1f1;
+}

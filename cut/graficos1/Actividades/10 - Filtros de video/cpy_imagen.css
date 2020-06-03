@@ -1,0 +1,20 @@
+canvas {
+    border-style: solid;
+}
+
+.dives {
+    float: left;
+    display: flex;
+}
+
+.dives>div {
+    padding: 5px;
+}
+
+html, body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f1f1f1;
+}
+body {
+    padding: 1%;
+}

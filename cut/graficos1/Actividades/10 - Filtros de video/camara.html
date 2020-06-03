@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtros de video</title>
+    <link rel="stylesheet" href="cpy_imagen.css">
+</head>
+
+<body>
+    <div class="dives">
+        <div>
+            <button id="btn">Capturar</button>
+        </div>
+        <div>
+            <input type="button" value="Negativo" onclick="negativo()" />
+        </div>
+        <div>
+            <label>Brillo</label><br>
+            <input type="range" value="0" max="127" min="-127" id="umbral">
+        </div>
+
+        <div>
+            <label>Descomposicion de Canales</label><br>
+            <input type="button" value="Rojo" onclick="rojo()" style="background-color: red;" />
+            <input type="button" value="Verde" onclick="verde()" style="background-color: green;" />
+            <input type="button" value="Azul" onclick="azul()" style="background-color: blue;" />
+        </div>
+        <div>
+            <label>Escala de Grises</label><br>
+            <input type="button" value="Escalar" onclick="escalag()" />
+        </div>
+        <div>
+            <label>Blanco y Negro</label><br>
+            <input type="range" value="127" max="255" min="0" id="umbralbyn">
+        </div>
+
+        <div>
+            <label>Intercambio de Canales</label><br>
+            <input type="button" value="G-->B" onclick="intercambio()" />
+        </div>
+        <div>
+            <label>Transparencia</label><br>
+            <input type="range" value="127" max="255" min="0" id="umbralt">
+        </div>
+        <div>
+            <label>Escala de Grises Formula Secreta</label><br>
+            <input type="button" value="Escalar" onclick="secreta()" />
+        </div>
+        <div>
+            <input type="button" value="Serpia" onclick="serpia()" />
+        </div>
+        <div>
+            <input type="button" value="Ruido" onclick="ruido()" />
+        </div>
+    </div>
+
+    <br><br>
+
+    <video src="" id="v" autoplay="true" </video>></video>
+    <img src="" id="img">
+
+    <canvas id="c"></canvas>
+    <canvas id="c2" style="display: none;"></canvas>
+
+
+    <!--<input type="button" onclick="capturar()" value="Capturar">-->
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>
