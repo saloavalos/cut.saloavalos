@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejemplo 1 - primera escena</title>
+	<script type="text/javascript" src="three.js"></script>
+	<script type="text/javascript" src="jquery-1.9.0.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+</head>
+<body>
+	<!-- div en el que mostraremos la salida -->
+	<div id="SalidaWebGL">
+	</div>
+	<!-- funcion Javascript que ejecutará nuestro ejemplo sobre Three.js -->
+	<script type="text/javascript">
+		// Cuando se cargue la página se ejecutará nuestra función
+		$(function () {
+
+			//Crear una escena, que contendrá todos los elementos como objetos, cámaras y luces.
+			var escena = new THREE.Scene();
+
+			//Crear una cámara, que define hacia dónde estamos mirando.   que tan cerca y lejos puede mirar la camara 0.1, 1000
+			var camara = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+			//Crear un objeto render y establecer su tamaño
+			var renderizador = new THREE.WebGLRenderer();
+			renderizador.setClearColor(new THREE.Color(0xEEEEEE));
+			renderizador.setSize(window.innerWidth, window.innerHeight);
+	
+			// 20 es para que tan ancho debe de estar la barra de xyz
+			var ejes = new THREE.AxisHelper( 20 );
+			escena.add(ejes);
+
+			// rojo ff0000, verde 00ff00, azul 0000ff
+
+			//Crear una esfera
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0x7777ff, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x=0;
+			esfera.position.y=0;
+			esfera.position.z=0;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			
+			//------------------- Crear una esfera roja -z ------------------//
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0x0000ff, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x=0;
+			esfera.position.y=0;
+			esfera.position.z= -10;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			//---------------------------------------------------------------//
+
+			//------------------- Crear una esfera roja +z ------------------//
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0x0000ff, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x=0;
+			esfera.position.y=0;
+			esfera.position.z= 9.2;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			//---------------------------------------------------------------//
+
+			//------------------- Crear una esfera roja +y ------------------//
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x=0;
+			esfera.position.y= 10.5;
+			esfera.position.z=0;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			//---------------------------------------------------------------//
+
+			//------------------- Crear una esfera roja -y ------------------//
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x=0;
+			esfera.position.y= -12;
+			esfera.position.z=0;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			//---------------------------------------------------------------//
+
+			//------------------- Crear una esfera roja -x ------------------//
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x= -9.2;
+			esfera.position.y=0;
+			esfera.position.z=0;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			//---------------------------------------------------------------//
+
+			//------------------- Crear una esfera roja +x ------------------//
+			// la forma geometrica del objeto
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			// el material del que esta hecho
+			var materialDeLaEsfera = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+			// le añado la figura y el material
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+
+			//Posición de la esfera
+			esfera.position.x= 10;
+			esfera.position.y=0;
+			esfera.position.z=0;
+
+			//Agregar la esfera a la escena
+			escena.add(esfera);
+			//---------------------------------------------------------------//
+
+			//Posicionamos la cámara y hacemos que apunte al centro de la escena.
+			camara.position.x = -30;
+			camara.position.y = 40;
+			camara.position.z = 30;
+			camara.lookAt(escena.position);
+
+			//Asociamos el resultado del renderizado con el elemento html adecuado (un div o un canvas)
+			$("#SalidaWebGL").append(renderizador.domElement);
+
+			//Renderizamos la escena
+			renderizador.render(escena, camara);
+
+    });
+	
+	</script>
+</body>
+</html>
