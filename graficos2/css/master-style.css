@@ -26,8 +26,9 @@ html {
     padding-right: 10%;
 }
 
-.title-container { 
+.title-container {
     padding: 4%;
+    font-size: 1.4vw;
 }
 
 .main-sub-container {
@@ -94,5 +95,5 @@ html {
 }
 
 .right-sub-conatainer-title {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }

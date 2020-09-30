@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+
+    <script src="../../three.js"></script>
+
+</head>
+<body>
+    
+
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.shadowMap.enabled = true;
+
+        var ejes = new THREE.AxesHelper( 20 );
+        scene.add(ejes);
+
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( -50, 70, 0 );
+        spotLight.castShadow = true;
+        scene.add( spotLight );
+
+        //Crear el plano que simula el suelo
+        var geometriaDelPlano = new THREE.PlaneGeometry(170,130);
+        var materialDelPlano = new THREE.MeshLambertMaterial({color: 0xcccccc});
+        var plano = new THREE.Mesh(geometriaDelPlano,materialDelPlano);
+        plano.receiveShadow = true;
+
+        //Rotar y posicionar el plano
+        plano.rotation.x=-0.5*Math.PI;
+        plano.position.x=15
+        plano.position.y=-10
+        plano.position.z=-15
+
+        //Agregar el plano a la escena
+        scene.add(plano);
+
+        // create cube
+        var geometry = new THREE.BoxGeometry(5,5,5);
+        var material = new THREE.MeshLambertMaterial( { color: 0x67ff00 } );
+        var cube = new THREE.Mesh( geometry, material );
+        cube.castShadow = true;
+
+        cube.position.x=-14;
+        cube.position.y=0;
+        cube.position.z=2;
+        scene.add( cube );
+
+        ////////////
+
+        var cube2 = new THREE.Mesh( geometry, material );
+        cube2.castShadow = true;
+
+        cube2.position.x=-22;
+        cube2.position.y=0;
+        cube2.position.z=19;
+        scene.add( cube2 );
+        ////////////
+
+        var cube3 = new THREE.Mesh( geometry, material );
+        cube3.castShadow = true;
+
+        cube3.position.x=-15;
+        cube3.position.y=0;
+        cube3.position.z=21;
+        scene.add( cube3 );
+        ////////////
+
+        var cube4 = new THREE.Mesh( geometry, material );
+        cube4.castShadow = true;
+
+        cube4.position.x=-10;
+        cube4.position.y=0;
+        cube4.position.z=10;
+        scene.add( cube4 );
+        ////////////
+
+        var cube5 = new THREE.Mesh( geometry, material );
+        cube5.castShadow = true;
+
+        cube5.position.x=-8;
+        cube5.position.y=0;
+        cube5.position.z=-11;
+        scene.add( cube5 );
+        ////////////
+
+        var cube6 = new THREE.Mesh( geometry, material );
+        cube6.castShadow = true;
+
+        cube6.position.x=-1;
+        cube6.position.y=0;
+        cube6.position.z=-9;
+        scene.add( cube6 );
+
+
+        //Crear una esfera
+			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
+			var materialDeLaEsfera = new THREE.MeshLambertMaterial({color: 0x18875f});
+			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+			esfera.castShadow = true;
+
+			//Posición de la esfera
+			esfera.position.x=-16;
+			esfera.position.y=0;
+			esfera.position.z=-8;
+
+			//Agregar la esfera a la escena
+            scene.add(esfera);
+            
+            /////////////////
+            var esfera2 = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+			esfera2.castShadow = true;
+
+			//Posición de la esfera2
+			esfera2.position.x=-9;
+			esfera2.position.y=0;
+			esfera2.position.z=17;
+
+			//Agregar la esfera2 a la escena
+			scene.add(esfera2);
+            /////////////////
+            var esfera3 = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+			esfera3.castShadow = true;
+
+			//Posición de la esfera3
+			esfera3.position.x=-29;
+			esfera3.position.y=0;
+			esfera3.position.z=15;
+
+			//Agregar la esfera3 a la escena
+			scene.add(esfera3);
+            /////////////////
+            var esfera4 = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
+			esfera4.castShadow = true;
+
+			//Posición de la esfera4
+			esfera4.position.x=6;
+			esfera4.position.y=0;
+			esfera4.position.z=-5;
+
+			//Agregar la esfera4 a la escena
+			scene.add(esfera4);
+
+        //camera.position.z = 5;
+        //Posicionamos la cámara y hacemos que apunte al centro de la escena.
+        camera.position.x = -30;
+        camera.position.y = 40;
+        camera.position.z = 30;
+        camera.lookAt(scene.position);
+
+
+        document.body.appendChild( renderer.domElement );
+
+        renderer.render( scene, camera );
+    </script>
+</body>
+</html>
