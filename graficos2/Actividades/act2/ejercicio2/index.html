@@ -61,7 +61,7 @@
 			var geometriaDeLaEsfera= new THREE.SphereGeometry(4,20,20);
 			// var materialDeLaEsfera = new THREE.MeshLambertMaterial({color: 0x18875f});
             const loader = new THREE.TextureLoader();
-			var materialDeLaEsfera = new THREE.MeshLambertMaterial( { map : loader.load( 'images/texture_zebra.jpg' ), });
+			var materialDeLaEsfera = new THREE.MeshLambertMaterial( { map : loader.load('images/texture_zebra.jpg') });
 			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
 			esfera.castShadow = true;
 
