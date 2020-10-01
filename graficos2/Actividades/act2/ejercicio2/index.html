@@ -10,7 +10,6 @@
         canvas { display: block; }
     </style>
 
-    <!-- <script src="../../three.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
 
 </head>
@@ -50,9 +49,11 @@
         scene.add(plano);
 
         // create cube
-        var geometry = new THREE.BoxGeometry(8,8,8);
-        var material = new THREE.MeshLambertMaterial( { color: 0x67ff00 } );
-        var cube = new THREE.Mesh( geometry, material );
+        var cubeGeometry = new THREE.BoxGeometry(8,8,8);
+        // var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0x67ff00 } );
+        var textureBalon = new THREE.TextureLoader().load("images/balon.png");
+        var cubeMaterial = new THREE.MeshLambertMaterial( { map: textureBalon });
+        var cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
         cube.castShadow = true;
 
         cube.position.x=-14;
@@ -61,19 +62,20 @@
         scene.add( cube );
 
         //Crear una esfera
-			var geometriaDeLaEsfera= new THREE.SphereGeometry(8,20,20);
-            var textureBalon = new THREE.TextureLoader().load("images/balon.png");
-			var materialDeLaEsfera = new THREE.MeshLambertMaterial( { map: textureBalon });
-			var esfera = new THREE.Mesh(geometriaDeLaEsfera, materialDeLaEsfera);
-			esfera.castShadow = true;
+        var sphereGeometry= new THREE.SphereGeometry(8,20,20);
+        var textureBalon = new THREE.TextureLoader().load("images/balon.png");
+        var sphereMaterial = new THREE.MeshMatcapMaterial();
+        sphereMaterial.matcap = textureBalon;
+        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.castShadow = true;
 
-			//Posición de la esfera
-			esfera.position.x=-39;
-			esfera.position.y=5;
-			esfera.position.z=-8;
+        //Posición de la esfera
+        sphere.position.x=-39;
+        sphere.position.y=5;
+        sphere.position.z=-8;
 
-			//Agregar la esfera a la escena
-            scene.add(esfera);
+        //Agregar la esfera a la escena
+        scene.add(sphere);
             
 
         //camera.position.z = 5;
