@@ -30,13 +30,26 @@
         document.body.appendChild( renderer.domElement );
 
         renderer.shadowMap.enabled = true;
+        // Es importante, suaviza las sombras
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 
         var ejes = new THREE.AxesHelper( 40 );
         scene.add(ejes);
 
         var spotLight = new THREE.SpotLight( 0xffffff );
-        spotLight.position.set( -80, 90, 0 );
+        spotLight.position.set( -180, 90, 30 );
         spotLight.castShadow = true;
+
+
+        // additional shadow properties of interest
+        spotLight.shadow.mapSize.width = 1200;
+        spotLight.shadow.mapSize.height = 1200;
+
+        // additional spotlight properties of interest
+        spotLight.intensity = 1.18;
+
+        // spotLight.shadow = 7;
+
         scene.add( spotLight );
 
         //Crear el plano que simula el suelo
@@ -350,5 +363,10 @@
         }
         animate();
     </script>
+
+    <audio autoplay loop>
+        <source src="traffic.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>

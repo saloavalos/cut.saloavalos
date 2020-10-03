@@ -6,7 +6,14 @@
     <title>Document</title>
 
     <style>
-        body { margin: 0; }
+        body { 
+            margin: 0; 
+            background-color: #EFFEE8;
+            background-image: url('images/bg.jpg');
+            background-repeat: no-repeat;
+            background-size: center;
+            background-position: top;
+        }
         canvas { display: block; }
     </style>
 
@@ -19,7 +26,7 @@
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-        var renderer = new THREE.WebGLRenderer();
+        var renderer = new THREE.WebGLRenderer({alpha: true});
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
 
@@ -88,5 +95,10 @@
         }
         animate();
     </script>
+
+    <audio autoplay loop>
+        <source src="soccer_game.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>
