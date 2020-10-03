@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body { 
+            margin: 0; 
+            background-color: #EFFEE8;
+            background-image: url('images/bg.jpg');
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: top;
+        }
+        canvas { display: block; }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+
+</head>
+<body>
+    
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        var renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        renderer.shadowMap.enabled = true;
+
+        var ejes = new THREE.AxesHelper( 20 );
+        scene.add(ejes);
+
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( -80, 70, 0 );
+        spotLight.castShadow = true;
+        scene.add( spotLight );
+
+        //Crear el plano que simula el suelo
+        var geometriaDelPlano = new THREE.PlaneGeometry(295,150);
+        var textureGrass = new THREE.TextureLoader().load("images/grass.jpg");
+        var materialDelPlano = new THREE.MeshLambertMaterial({map: textureGrass});
+        var plano = new THREE.Mesh(geometriaDelPlano,materialDelPlano);
+        plano.receiveShadow = true;
+
+        //Rotar y posicionar el plano
+        plano.rotation.x=-0.5*Math.PI;
+        plano.position.x=75;
+        plano.position.y=-10;
+        plano.position.z=-15;
+
+        //Agregar el plano a la escena
+        scene.add(plano);
+
+        //Crear una esfera
+        var sphereGeometry= new THREE.SphereGeometry(8,20,20);
+        var textureBalon = new THREE.TextureLoader().load("images/balon.png");
+        var sphereMaterial = new THREE.MeshMatcapMaterial();
+        sphereMaterial.matcap = textureBalon;
+        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        sphere.castShadow = true;
+
+        //Posición de la esfera
+        sphere.position.x=-39;
+        sphere.position.y=5;
+        sphere.position.z=-8;
+
+        //Agregar la esfera a la escena
+        scene.add(sphere);
+            
+
+        //camera.position.z = 5;
+        //Posicionamos la cámara y hacemos que apunte al centro de la escena.
+        camera.position.x = -60;
+        camera.position.y = 40;
+        camera.position.z = 30;
+        camera.lookAt(scene.position);
+
+        var paso=0;  
+
+        function animate() {
+            requestAnimationFrame( animate );
+            // cube.rotation.x += 0.01;
+            // cube.rotation.y += 0.01;
+
+            paso +=0.05;
+            sphere.position.x = -20+( 10*(Math.cos(paso)));
+
+            sphere.position.y = 2 +( 10*Math.abs(Math.sin(paso)));
+            renderer.render( scene, camera );
+        }
+        animate();
+    </script>
+
+    <audio autoplay loop>
+        <source src="soccer_game.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>

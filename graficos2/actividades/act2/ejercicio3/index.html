@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body { 
+            margin: 0; 
+            background-color: #f1f1f1;
+            background-image: url('images/bg.jpg');
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: top;
+        }
+        canvas { display: block; }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+
+</head>
+<body>
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        var renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        renderer.shadowMap.enabled = true;
+        // Es importante, suaviza las sombras
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
+        var ejes = new THREE.AxesHelper( 40 );
+        scene.add(ejes);
+
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( -180, 90, 30 );
+        spotLight.castShadow = true;
+
+
+        // additional shadow properties of interest
+        spotLight.shadow.mapSize.width = 1200;
+        spotLight.shadow.mapSize.height = 1200;
+
+        // additional spotlight properties of interest
+        spotLight.intensity = 1.18;
+
+        // spotLight.shadow = 7;
+
+        scene.add( spotLight );
+
+        //Crear el plano que simula el suelo
+        var geometriaDelPlano = new THREE.PlaneGeometry(480,85);
+        var textureGrass = new THREE.TextureLoader().load("images/street.jpg");
+        var materialDelPlano = new THREE.MeshLambertMaterial({map: textureGrass});
+        var plano = new THREE.Mesh(geometriaDelPlano,materialDelPlano);
+        plano.receiveShadow = true;
+
+        //Rotar y posicionar el plano
+        plano.rotation.x=-0.5 *Math.PI;
+        plano.position.x=165;
+        // plano.position.y=-6.5;
+        plano.position.y=-29;
+        plano.position.z=0;
+
+        // plano.rotation.y =  .2;
+
+        //Agregar el plano a la escena
+        scene.add(plano);
+
+        // create cube
+        var cubeGeometry = new THREE.BoxGeometry(5,5,5);
+
+        const loader = new THREE.TextureLoader();
+        var cubeMaterials = [
+            new THREE.MeshLambertMaterial({map: loader.load('images/black.jpg')}), // Right side
+            new THREE.MeshLambertMaterial({map: loader.load('images/black.jpg')}), // Left side
+            new THREE.MeshLambertMaterial({map: loader.load('images/white.jpg')}), // Top side
+            new THREE.MeshLambertMaterial({map: loader.load('images/white.jpg')}), // Bottom side
+            new THREE.MeshLambertMaterial({map: loader.load('images/white.jpg')}), // Front side
+            new THREE.MeshLambertMaterial({map: loader.load('images/white.jpg')}), // Back side
+        ];
+
+
+        
+        ///////////////////
+        var cube1 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube1.castShadow = true;
+        cube1.receiveShadow = true;
+
+        cube1.position.x=-22;
+        // cube1.position.y=-2;
+        cube1.position.y= -26.5;
+        cube1.position.z= -3.5;
+
+        cube1.rotation.y = 1.6;
+
+        scene.add( cube1 );
+        ///////////////////
+        ///////////////////
+        var cube2 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube2.castShadow = true;
+        cube2.receiveShadow = true;
+
+        cube2.position.x=-22;
+        cube2.position.y= -26.5;
+        cube2.position.z= 3.5;
+
+        cube2.rotation.y = 1.6;
+
+        scene.add( cube2 );
+        ///////////////////
+        ///////////////////
+        var cube3 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube3.castShadow = true;
+        cube3.receiveShadow = true;
+
+        cube3.position.x=-22;
+        cube3.position.y=-21.5;
+        cube3.position.z= -3.5;
+
+        cube3.rotation.y = 1;
+
+        scene.add( cube3 );
+        ///////////////////
+        ///////////////////
+        var cube4 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube4.castShadow = true;
+        cube4.receiveShadow = true;
+
+        cube4.position.x= -22;
+        cube4.position.y= -21.5;
+        cube4.position.z= 3.5;
+
+        cube4.rotation.y = -1;
+
+        scene.add( cube4 );
+        ///////////////////
+        ///////////////////
+        var cube5 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube5.castShadow = true;
+        cube5.receiveShadow = true;
+
+        cube5.position.x= -22;
+        cube5.position.y= -16.5;
+        cube5.position.z= -3.5;
+
+        cube5.rotation.y = .7;
+
+        scene.add( cube5 );
+        ///////////////////
+        ///////////////////
+        var cube6 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube6.castShadow = true;
+        cube6.receiveShadow = true;
+
+        cube6.position.x= -22;
+        cube6.position.y= -16.5;
+        cube6.position.z= 3.5;
+
+        cube6.rotation.y = -.7;
+
+        scene.add( cube6 );
+        ///////////////////
+        ///////////////////
+        var cube7 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube7.castShadow = true;
+        cube7.receiveShadow = true;
+
+        cube7.position.x= -22;
+        cube7.position.y= -11.5;
+        cube7.position.z= -3.5;
+
+        cube7.rotation.y = 3.2;
+
+        scene.add( cube7 );
+        ///////////////////
+        ///////////////////
+        var cube8 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube8.castShadow = true;
+        cube8.receiveShadow = true;
+
+        cube8.position.x= -22;
+        cube8.position.y= -11.5;
+        cube8.position.z= 3.5;
+
+        cube8.rotation.y = 3.2;
+
+        scene.add( cube8 );
+        ///////////////////
+        ///////////////////
+        var cube9 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube9.castShadow = true;
+        cube9.receiveShadow = true;
+
+        cube9.position.x= -22;
+        cube9.position.y= -6.5;
+        cube9.position.z= -3.5;
+
+        cube9.rotation.y = 2.55;
+
+        scene.add( cube9 );
+        ///////////////////
+        ///////////////////
+        var cube10 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube10.castShadow = true;
+        cube10.receiveShadow = true;
+
+        cube10.position.x= -22;
+        cube10.position.y= -6.5;
+        cube10.position.z= 3.5;
+
+        cube10.rotation.y = -2.55;
+
+        scene.add( cube10 );
+        ///////////////////
+        ///////////////////
+        var cube11 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube11.castShadow = true;
+        cube11.receiveShadow = true;
+
+        cube11.position.x= -22;
+        cube11.position.y= -1.5;
+        cube11.position.z= -3.5;
+
+        cube11.rotation.y = 2.15;
+
+        scene.add( cube11 );
+        ///////////////////
+        ///////////////////
+        var cube12 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube12.castShadow = true;
+        cube12.receiveShadow = true;
+
+        cube12.position.x= -22;
+        cube12.position.y= -1.5;
+        cube12.position.z= 3.5;
+
+        cube12.rotation.y = -2.15;
+
+        scene.add( cube12 );
+        ///////////////////
+        ///////////////////
+        var cube13 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube13.castShadow = true;
+        cube13.receiveShadow = true;
+
+        cube13.position.x= -22;
+        cube13.position.y= 3.5;
+        cube13.position.z= -3.5;
+
+        cube13.rotation.y = 1.6;
+
+        scene.add( cube13 );
+        ///////////////////
+        ///////////////////
+        var cube14 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube14.castShadow = true;
+        cube14.receiveShadow = true;
+
+        cube14.position.x= -22;
+        cube14.position.y= 3.5;
+        cube14.position.z= 3.5;
+
+        cube14.rotation.y = -1.6;
+
+        scene.add( cube14 );
+        ///////////////////
+        ///////////////////
+        var cube15 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube15.castShadow = true;
+        cube15.receiveShadow = true;
+
+        cube15.position.x= -22;
+        cube15.position.y= 8.5;
+        cube15.position.z= -3.5;
+
+        cube15.rotation.y = 1;
+
+        scene.add( cube15 );
+        ///////////////////
+        ///////////////////
+        var cube16 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube16.castShadow = true;
+        cube16.receiveShadow = true;
+
+        cube16.position.x= -22;
+        cube16.position.y= 8.5;
+        cube16.position.z= 3.5;
+
+        cube16.rotation.y = -1;
+
+        scene.add( cube16 );
+        ///////////////////
+        ///////////////////
+        var cube17 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube17.castShadow = true;
+        cube17.receiveShadow = true;
+
+        cube17.position.x= -22;
+        cube17.position.y= 13.5;
+        cube17.position.z= -3.5;
+
+        cube17.rotation.y = .7;
+
+        scene.add( cube17 );
+        ///////////////////
+        ///////////////////
+        var cube18 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube18.castShadow = true;
+        cube18.receiveShadow = true;
+
+        cube18.position.x= -22;
+        cube18.position.y= 13.5;
+        cube18.position.z= 3.5;
+
+        cube18.rotation.y = -.7;
+
+        scene.add( cube18 );
+        ///////////////////
+        ///////////////////
+        var cube19 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube19.castShadow = true;
+        cube19.receiveShadow = true;
+
+        cube19.position.x= -22;
+        cube19.position.y= 18.5;
+        cube19.position.z= -3.5;
+
+        cube19.rotation.y = 3.2;
+
+        scene.add( cube19 );
+        ///////////////////
+        ///////////////////
+        var cube20 = new THREE.Mesh( cubeGeometry, cubeMaterials );
+        cube20.castShadow = true;
+        cube20.receiveShadow = true;
+
+        cube20.position.x= -22;
+        cube20.position.y= 18.5;
+        cube20.position.z= 3.5;
+
+        cube20.rotation.y = -3.2;
+
+        scene.add( cube20 );
+        ///////////////////
+
+
+
+
+        //Posicionamos la cámara y hacemos que apunte al centro de la escena.
+        camera.position.x = -90;
+        camera.position.y = -15;
+        camera.position.z = 0;
+        camera.lookAt(scene.position);
+
+        function animate() {
+            requestAnimationFrame( animate );
+            renderer.render( scene, camera );
+        }
+        animate();
+    </script>
+
+    <audio autoplay loop>
+        <source src="traffic.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
