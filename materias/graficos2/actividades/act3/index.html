@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cut.saloavalos.com/general_resources/favicon.png"/>
+    <title>Act.3</title>
+
+    <style>
+        body { 
+            margin: 0; 
+            background-color: #242424;
+        }
+        canvas { display: block; }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+
+</head>
+<body>
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+        var renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+
+        renderer.shadowMap.enabled = true;
+        // Es importante, suaviza las sombras
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
+        // var ejes = new THREE.AxesHelper( 40 );
+        // scene.add(ejes);
+
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( -180, 90, 30 );
+        spotLight.castShadow = true;
+
+
+        // additional shadow properties of interest
+        spotLight.shadow.mapSize.width = 1200;
+        spotLight.shadow.mapSize.height = 1200;
+
+        // additional spotlight properties of interest
+        spotLight.intensity = 1.18;
+
+        // spotLight.shadow = 7;
+
+        scene.add( spotLight );
+
+        // create dice
+        var diceGeometry = new THREE.BoxGeometry(5,5,5);
+
+        const loader = new THREE.TextureLoader();
+        var diceMaterials = [
+            new THREE.MeshLambertMaterial({map: loader.load('images/f1.jpg')}), // Right side
+            new THREE.MeshLambertMaterial({map: loader.load('images/f2.jpg')}), // Left side
+            new THREE.MeshLambertMaterial({map: loader.load('images/f3.jpg')}), // Top side
+            new THREE.MeshLambertMaterial({map: loader.load('images/f4.jpg')}), // Bottom side
+            new THREE.MeshLambertMaterial({map: loader.load('images/f5.jpg')}), // Front side
+            new THREE.MeshLambertMaterial({map: loader.load('images/f6.jpg')}), // Back side
+        ];
+
+        ///////////////////
+        var dice = new THREE.Mesh( diceGeometry, diceMaterials );
+        dice.castShadow = true;
+        dice.receiveShadow = true;
+
+        dice.position.x=0;
+        // dice.position.y=-2;
+        dice.position.y= 0;
+        dice.position.z= 0;
+
+
+        scene.add( dice );
+        ///////////////////
+
+        //Posicionamos la cámara y hacemos que apunte al centro de la escena.
+        camera.position.x = -20;
+        camera.position.y = -15;
+        camera.position.z = 0;
+        camera.lookAt(scene.position);
+
+        function animate() {
+            // rotar el cubo
+            dice.rotation.x += 0.02; dice.rotation.y += 0.02; dice.rotation.z += 0.02;
+
+
+            requestAnimationFrame( animate );
+            renderer.render( scene, camera );
+        }
+        animate();
+    </script>
+
+</body>
+</html>
